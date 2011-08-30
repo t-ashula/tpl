@@ -2,7 +2,7 @@ use inc::Module::Install;
 name 'Canonical';
 all_from 'lib/Canonical.pm';
 
-# requires '';
+requires 'LWP::Protocol::https';
 
 tests 't/*.t';
 author_tests 'xt';
