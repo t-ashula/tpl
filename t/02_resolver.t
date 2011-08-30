@@ -4,8 +4,6 @@ use Test::Exception;
 
 use Canonical;
 
-
-
 my $cn = Canonical->new;
 
 sub test_redirect {
@@ -22,6 +20,6 @@ test_redirect 'http://t.co/jpXmjiV', 'http://buzztter.com/ja', 't.co';
 test_redirect 'http://www.google.com', 'http://www.google.com', 'no redirect';
 
 throws_ok { $cn->canonical(); } qr/no arguments error/, 'no args error';
-throws_ok { $cn->canonical( 'foobar:' ); } qr/not supported scheme/, 'https? only';
+throws_ok { $cn->canonical( 'foobar:hoge' ); } qr/not supported scheme/, 'https? only';
 throws_ok { $cn->canonical( q => 'a' ); } qr/no url found/, 'url required';
 

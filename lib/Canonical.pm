@@ -5,6 +5,8 @@ use warnings;
 use utf8;
 
 use LWP::UserAgent;
+use LWP::Protocol::http;
+use LWP::Protocol::https;
 use URI;
 use Carp qw{};
 use Data::Dumper;
@@ -72,13 +74,13 @@ sub _resolve_remote {
     unshift @rurls, { code => $res->code, url => $rurl };
     $res = $ua->request( HTTP::Request->new( GET => URI->new( $rurl ) ) );
   }
-  warn Dumper @rurls;
+  #warn Dumper reverse @rurls;
   for my $rurl ( @rurls ) {
-    if ( $rurl->{code} != 302 ) {
-      return $rurl->{url};
+    if ( $rurl->{ code } != 302 ) {
+      return $rurl->{ url };
     }
   }
-  return $rurls[ -1 ]{url}; # return original url
+  return $rurls[ -1 ]{ url }; # return original url
 }
 
 1;
